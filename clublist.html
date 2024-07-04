@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Events Posting</title>
+    <link rel="stylesheet" href="clublist.css">
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" class="logo" alt="SVECW Logo" width="100">
+        <h1>SHRI VISHNU ENGINEERING COLLEGE FOR WOMEN, BHIMAVARAM</h1>
+    </div>
+
+    <div class="nav-container">
+        <a href="Homepage.html">Home</a>
+        <a href="clublist.html">Club Events</a>
+        <a href="collegelist.html">College Events</a>
+        <a href="loginpage.html">Login</a>
+    </div>
+    <div class="container">
+        <div class="button-container">
+            <button id="postEventBtn">Post an Event</button>
+            <button id="viewEventsBtn">View All Events</button>
+        </div>
+
+        <div id="eventFormContainer" class="hidden">
+            <h1>Post an Event</h1>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventName">Event Name</label>
+                    <input type="text" id="eventName" name="eventName" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Event Date</label>
+                    <input type="date" id="eventDate" name="eventDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDescription">Event Description</label>
+                    <textarea id="eventDescription" name="eventDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="googleFormLink">Google Form Link (Optional)</label>
+                    <input type="text" id="googleFormLink" name="googleFormLink">
+                </div>
+                <div class="form-group">
+                    <label for="googleSheetLink">Google Sheet Link for Responses (Optional)</label>
+                    <input type="text" id="googleSheetLink" name="googleSheetLink">
+                </div>
+                <button type="submit">Post Event</button>
+            </form>
+        </div>
+
+        <div id="eventListContainer" class="hidden">
+            <h2>Club Events</h2>
+            <div id="eventList"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('postEventBtn').addEventListener('click', function() {
+            document.getElementById('eventFormContainer').classList.toggle('hidden');
+            document.getElementById('eventListContainer').classList.add('hidden');
+        });
+
+        document.getElementById('viewEventsBtn').addEventListener('click', function() {
+            document.getElementById('eventListContainer').classList.toggle('hidden');
+            document.getElementById('eventFormContainer').classList.add('hidden');
+            displayEvents();
+        });
+
+        document.getElementById('eventForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const eventName = document.getElementById('eventName').value;
+            const eventDate = document.getElementById('eventDate').value;
+            const eventDescription = document.getElementById('eventDescription').value;
+            const googleFormLink = document.getElementById('googleFormLink').value;
+            const googleSheetLink = document.getElementById('googleSheetLink').value;
+
+            const eventItem = {
+                id: Date.now(),
+                eventName,
+                eventDate,
+                eventDescription,
+                googleFormLink: googleFormLink.trim(),
+                googleSheetLink: googleSheetLink.trim()
+            };
+
+            let events = JSON.parse(localStorage.getItem('clubEvents')) || [];
+            events.push(eventItem);
+            localStorage.setItem('clubEvents', JSON.stringify(events));
+
+            displayEvents();
+
+            document.getElementById('eventForm').reset();
+            document.getElementById('eventFormContainer').classList.add('hidden');
+        });
+
+        function deleteEvent(id) {
+            let events = JSON.parse(localStorage.getItem('clubEvents')) || [];
+            events = events.filter(event => event.id !== id);
+            localStorage.setItem('clubEvents', JSON.stringify(events));
+            displayEvents();
+        }
+
+        function displayEvents() {
+            const eventList = document.getElementById('eventList');
+            eventList.innerHTML = '';
+            const events = JSON.parse(localStorage.getItem('clubEvents')) || [];
+
+            events.forEach(event => {
+                const eventElement = document.createElement('div');
+                eventElement.classList.add('event-element');
+                eventElement.innerHTML = `
+                    <h3>${event.eventName}</h3>
+                    <p><strong>Date:</strong> ${event.eventDate}</p>
+                    <p>${event.eventDescription}</p>
+                    ${event.googleFormLink ? `<p><a href="${event.googleFormLink}" target="_blank">Register Here</a></p>` : ''}
+                    ${event.googleSheetLink ? `<h4>Responses</h4><iframe src="${event.googleSheetLink}"></iframe>` : ''}
+                    <button class="delete-btn" onclick="deleteEvent(${event.id})">Delete Event</button>
+                    <hr>
+                `;
+                eventList.appendChild(eventElement);
+            });
+        }
+    </script>
+</body>
+</html>

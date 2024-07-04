@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinator Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Club Dashboard</h1>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br>
+
+        <select id="clubSelect">
+            <option value="club1">Club 1</option>
+            <option value="club2">Club 2</option>
+            <!-- Add more club options here -->
+        </select>
+
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- Event Form and List -->
+    <div id="eventFormContainer" style="display: none;">
+        <!-- Event form and event list will be displayed here -->
+    </div>
+
+    <script src="coordinator.js"></script>
+</body>
+</html>

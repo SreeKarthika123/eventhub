@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            border-bottom: 1px solid #ccc;
+        }
+        .header .logo {
+            margin-right: 20px;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f0f0f0;
+            padding: 10px 50px;
+            font-size: larger;
+            margin-top: 20px;
+        }
+        .nav-container a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .nav-container a:hover {
+            background-color: #ddd;
+        }
+        .parent-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .box {
+            width: 250px;
+            height: 250px;
+            padding: 30px;
+            text-align: center;
+            color: rgb(12, 23, 237);
+            background-color: white;
+            transition: box-shadow 0.3s ease;
+            border-radius: 10px;
+        }
+        .box:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        input{
+            height: 30px;
+            border-radius: 5px;
+        }
+        label{
+            font-size: larger;
+        }
+
+        button{
+            background-color: rgb(75, 12, 248);
+            width: 100px;
+            border-radius: 3px;
+            height: 30px;
+            color: white;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(232, 228, 228);">
+    <div class="header">
+        <img src="D:\22B01A0579\svecwlogo.jpg" class="logo" alt="SVECW Logo" width="100">
+        <h1>SHRI VISHNU ENGINEERING COLLEGE FOR WOMEN, BHIMAVARAM</h1>
+    </div>
+
+    <div class="nav-container">
+        <a href="Homepage.html">Home</a>
+        <a href="clublist.html">Club Events</a>
+        <a href="Collegeevents.html">College Events</a>
+        <a href="loginpage.html">Login</a>
+    </div>
+
+    <div class="parent-container">
+        <div class="box">
+            <form action="facultypost.html"> 
+                <h2>Faculty Login</h2>
+                <label for="first">Username:</label><br>
+                <input type="text" id="first" name="first" placeholder="Enter your Username" required><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" placeholder="Enter your Password" required><br><br>
+                <button type="submit">Login</button> 
+            </form>
+        </div>
+        
+        <div class="box">
+            <form action="studentview.html">
+                <h2>Student Login</h2>
+                <label for="third">Username:</label><br>
+                <input type="text" id="third" name="third" placeholder="Enter your Username" required><br>
+                <label for="password3">Password:</label><br>
+                <input type="password" id="password3" name="password3" placeholder="Enter your Password" required><br><br>
+                <button type="submit" style="background-color: rgb(75, 12, 248);width: 70px;">Login</button> 
+            </form>
+        </div>
+        <div class="box">
+            <form action="coordi.html">
+                <h2>Coordinator Login</h2>
+                <label for="third">Username:</label><br>
+                <input type="text" id="third" name="third" placeholder="Enter your Username" required><br>
+                <label for="password3">Password:</label><br>
+                <input type="password" id="password3" name="password3" placeholder="Enter your Password" required><br><br>
+                <button type="submit" style="background-color: rgb(75, 12, 248);width: 70px;">Login</button> 
+            </form>
+    </div>
+</body>
+</html>

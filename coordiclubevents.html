@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Events</title>
+    <link rel="stylesheet" href="clublist.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Club Events</h1>
+    </div>
+
+    <div class="container">
+        <h2>Events for <span id="clubName"></span></h2>
+        <div id="eventListContainer">
+            <div id="eventList"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectedClub = localStorage.getItem('viewingClub');
+            if (!selectedClub) {
+                alert('No club selected. Redirecting to club selection page.');
+                window.location.href = 'coordiclublist.html';
+                return;
+            }
+            document.getElementById('clubName').textContent = selectedClub;
+            displayClubEvents();
+        });
+
+        function displayClubEvents() {
+            const eventList = document.getElementById('eventList');
+            eventList.innerHTML = '';
+
+            const clubEvents = JSON.parse(localStorage.getItem('clubEvents')) || [];
+            const selectedClub = localStorage.getItem('viewingClub');
+            const myClubEvents = clubEvents.filter(event => event.club === selectedClub);
+
+            myClubEvents.forEach(event => {
+                const eventElement = document.createElement('div');
+                eventElement.classList.add('event-element');
+                eventElement.innerHTML = `
+                    <h3>${event.eventName}</h3>
+                    <p><strong>Date:</strong> ${event.eventDate}</p>
+                    <p>${event.eventDescription}</p>
+                    ${event.googleFormLink ? `<p><a href="${event.googleFormLink}" target="_blank">Register Here</a></p>` : ''}
+                `;
+                eventList.appendChild(eventElement);
+            });
+        }
+    </script>
+</body>
+</html>

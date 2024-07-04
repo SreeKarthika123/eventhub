@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Club Events</title>
+    <link rel="stylesheet" href="clublist.css">
+</head>
+<body>
+    <div class="header">
+        <img src="D:\22B01A0579\svecwlogo.jpg" class="logo" alt="SVECW Logo" width="100">
+        <h1>SHRI VISHNU ENGINEERING COLLEGE FOR WOMEN, BHIMAVARAM</h1>
+    </div>
+    <h1 style="text-align: center;color: rgb(0, 55, 255);">Coordinator posted Club Events</h1>
+    <div class="container">
+
+        <div id="eventList" class="hidden"></div>
+    </div>
+
+    <script>
+        // Function to display club events
+        function displayClubEvents() {
+            const eventList = document.getElementById('eventList');
+            eventList.innerHTML = '';
+            const clubEvents = JSON.parse(localStorage.getItem('clubEvents')) || [];
+
+            clubEvents.forEach(event => {
+                const eventElement = document.createElement('div');
+                eventElement.classList.add('event-element');
+                eventElement.innerHTML = `
+                    <h3>${event.eventName}</h3>
+                    <p><strong>Date:</strong> ${event.eventDate}</p>
+                    <p>${event.eventDescription}</p>
+                    ${event.googleFormLink ? `<p><a href="${event.googleFormLink}" target="_blank">Register Here</a></p>` : ''}
+                `;
+                eventList.appendChild(eventElement);
+            });
+
+            eventList.classList.remove('hidden');
+        }
+
+        // Call the function to display club events when the page loads
+        document.addEventListener('DOMContentLoaded', displayClubEvents);
+    </script>
+</body>
+</html>
